@@ -1,0 +1,32 @@
+<?php
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function volxel_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.volxel':
+      $output = '';
+      $output .= '<h2>' . t('3D volumetric display of DICOM data') . '</h2>';
+      $output .= '<h3>' . t('Instructions') . '</h3>';
+
+      $output .= '<p>' . t('If you\'re reading this, you\'ve already installed the module either via <code>composer require drupal/volxel</code> or directly downloading it (which <em>should</em> be safe) and have already enabled it in <strong>/admin/modules</strong>.') . '</p>';
+      $output .= '<p>' . t("To display files in the 3D viewer, add a <code>file</code> field to a content type and set its display to be the Volxel Formatter.") . "</p>";
+
+      return $output;
+  }
+}
+
+function volxel_theme($existing, $type, $theme, $path) {
+  return [
+    "volxel_viewer" => [
+      "template" => "volxel-viewer",
+      "variables" => [
+        "urls" => [],
+        "unique_id" => NULL
+      ]
+    ]
+  ];
+}

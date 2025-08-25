@@ -1,0 +1,5 @@
+volxel.form:
+  title: "Configure Volxel"
+  description: Settings for filler text generation.
+  route_name: volxel.form
+  parent: system.admin_config_development

@@ -1,0 +1,7 @@
+name: Volxel3D DICOM Viewer
+description: Allows you to display 3D volumetric data stored in DICOM images
+package: Custom
+
+type: module
+core_version_requirement: ^11
+configure: volxel.form

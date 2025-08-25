@@ -1,0 +1,9 @@
+{#
+  Template variables:
+  - urls: array of absolute URLs
+  - unique_id: id for the element
+#}
+
+<div class="volxel-wrapper">
+  <volxel-3d-viewer id="{{ unique_id }}" data-urls="{{ urls|json_encode|e('html_attr') }}"></volxel-3d-viewer>
+</div>

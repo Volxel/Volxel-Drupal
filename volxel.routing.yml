@@ -1,0 +1,7 @@
+volxel.form:
+  path: "/admin/config/development/volxel"
+  defaults:
+    _form: '\Drupal\volxel\Form\VolxelForm'
+    _title: "Volxel Settings"
+  requirements:
+    _permission: "administer site configuration"

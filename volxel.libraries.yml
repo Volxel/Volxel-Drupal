@@ -1,0 +1,7 @@
+volxel_3d_viewer:
+  version: 1.x
+  js:
+    assets/js/index.mjs:
+      attributes:
+        type: module
+      preprocess: false
