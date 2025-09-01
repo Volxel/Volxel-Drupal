@@ -5,5 +5,9 @@
 #}
 
 <div class="volxel-wrapper">
+{% if urls|length == 1 %}
+  <volxel-3d-viewer id="{{ unique_id }}" data-zip-url="{{ urls[0]|e('html_attr') }}"></volxel-3d-viewer>
+{% else %}
   <volxel-3d-viewer id="{{ unique_id }}" data-urls="{{ urls|json_encode|e('html_attr') }}"></volxel-3d-viewer>
+{% endif %}
 </div>
