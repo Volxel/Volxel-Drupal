@@ -50,4 +50,7 @@ jobs:
         run: rm -f ./assets/js/index.mjs && mv ./index.mjs ./assets/js/index.mjs
       - name: List all contents
         run: ls -R
-
+      - name: Commit new index.mjs file
+        run: |
+          git commit -am --allow-empty "Update index.mjs"
+          git push
