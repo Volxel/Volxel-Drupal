@@ -46,6 +46,8 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           name: bundle
+      - name: Replace index.mjs with built one
+        run: rm -f ./assets/js/index.mjs && cp ./index.mjs ./assets/js
       - name: List all contents
         run: ls -R
 

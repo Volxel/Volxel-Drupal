@@ -1,1 +1,0 @@
-export * from '@volxel/3d-viewer';
