@@ -7,5 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        name: Checkout Root Repo
+      - uses: actions/checkout@v5
+        name: Checkout JS Repo
+        with:
+          repository: "Volxel/Volxel"
+      - run: pwd
       - run: ls
 
