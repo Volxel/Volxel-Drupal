@@ -1,6 +1,8 @@
 name: Update JavaScript Bundle
 on:
   workflow_dispatch:
+  repository_dispatch:
+    types: [update-bundle]
 permissions:
   contents: write
 
