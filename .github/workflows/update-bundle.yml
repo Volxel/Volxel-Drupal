@@ -47,7 +47,7 @@ jobs:
         with:
           name: bundle
       - name: Replace index.mjs with built one
-        run: rm -f ./assets/js/index.mjs && cp ./index.mjs ./assets/js
+        run: rm -f ./assets/js/index.mjs && mv ./index.mjs ./assets/js/index.mjs
       - name: List all contents
         run: ls -R
 
