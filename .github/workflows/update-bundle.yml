@@ -3,15 +3,47 @@ on:
   workflow_dispatch:
 
 jobs:
-  update:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-        name: Checkout Root Repo
       - uses: actions/checkout@v5
         name: Checkout JS Repo
         with:
           repository: "Volxel/Volxel"
-      - run: pwd
-      - run: ls
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: 'pnpm'
+      - name: Setup Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          target: wasm32-unknown-unknown
+          cache-workspaces: "./dicom_preprocessor -> target"
+      - name: Setup WASM Pack
+        run: pnpm i -g wasm-pack
+      - name: Build WASM binary
+        run: wasm-pack build ./dicom_preprocessor
+      - name: Install dependencies
+        run: pnpm i --frozen-lockfile
+      - name: Build bundle
+        run: cd bundle && pnpm build && cd ..
+      - name: Upload index.mjs from Bundle
+        uses: actions/upload-artifact@v4
+        with:
+          path: "bundle/dist/index.mjs"
+          name: bundle
+  update:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Download Bundle
+        uses: actions/download-artifact@v5
+        with:
+          name: bundle
 
