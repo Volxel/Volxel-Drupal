@@ -46,4 +46,6 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           name: bundle
+      - name: List all contents
+        run: ls -R
 
