@@ -52,5 +52,5 @@ jobs:
         run: ls -R
       - name: Commit new index.mjs file
         run: |
-          git commit -am --allow-empty "Update index.mjs"
+          git commit --allow-empty -am "Update index.mjs"
           git push
