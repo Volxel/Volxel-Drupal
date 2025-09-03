@@ -2091,13 +2091,13 @@ function yI(I, A) {
   return I;
 }
 function JI(I, A) {
-  const g = A[0], C = A[1], B = A[2], Q = A[3], E = A[4], D = A[5], i = A[6], w = A[7], G = A[8], o = A[9], F = A[10], Y = A[11], h = A[12], N = A[13], R = A[14], J = A[15], s = g * D - C * E, c = g * i - B * E, y = g * w - Q * E, a = C * i - B * D, M = C * w - Q * D, L = B * w - Q * i, H = G * N - o * h, l = G * R - F * h, q = G * J - Y * h, W = o * R - F * N, d = o * J - Y * N, V = F * J - Y * R;
-  let k = s * V - c * d + y * W + a * q - M * l + L * H;
-  return k ? (k = 1 / k, I[0] = (D * V - i * d + w * W) * k, I[1] = (B * d - C * V - Q * W) * k, I[2] = (N * L - R * M + J * a) * k, I[3] = (F * M - o * L - Y * a) * k, I[4] = (i * q - E * V - w * l) * k, I[5] = (g * V - B * q + Q * l) * k, I[6] = (R * y - h * L - J * c) * k, I[7] = (G * L - F * y + Y * c) * k, I[8] = (E * d - D * q + w * H) * k, I[9] = (C * q - g * d - Q * H) * k, I[10] = (h * M - N * y + J * s) * k, I[11] = (o * y - G * M - Y * s) * k, I[12] = (D * l - E * W - i * H) * k, I[13] = (g * W - C * l + B * H) * k, I[14] = (N * c - h * a - R * s) * k, I[15] = (G * a - o * c + F * s) * k, I) : null;
+  const g = A[0], C = A[1], B = A[2], Q = A[3], E = A[4], D = A[5], i = A[6], w = A[7], G = A[8], o = A[9], F = A[10], Y = A[11], h = A[12], N = A[13], R = A[14], J = A[15], s = g * D - C * E, c = g * i - B * E, y = g * w - Q * E, a = C * i - B * D, M = C * w - Q * D, L = B * w - Q * i, H = G * N - o * h, l = G * R - F * h, d = G * J - Y * h, W = o * R - F * N, V = o * J - Y * N, q = F * J - Y * R;
+  let k = s * q - c * V + y * W + a * d - M * l + L * H;
+  return k ? (k = 1 / k, I[0] = (D * q - i * V + w * W) * k, I[1] = (B * V - C * q - Q * W) * k, I[2] = (N * L - R * M + J * a) * k, I[3] = (F * M - o * L - Y * a) * k, I[4] = (i * d - E * q - w * l) * k, I[5] = (g * q - B * d + Q * l) * k, I[6] = (R * y - h * L - J * c) * k, I[7] = (G * L - F * y + Y * c) * k, I[8] = (E * V - D * d + w * H) * k, I[9] = (C * d - g * V - Q * H) * k, I[10] = (h * M - N * y + J * s) * k, I[11] = (o * y - G * M - Y * s) * k, I[12] = (D * l - E * W - i * H) * k, I[13] = (g * W - C * l + B * H) * k, I[14] = (N * c - h * a - R * s) * k, I[15] = (G * a - o * c + F * s) * k, I) : null;
 }
 function MI(I) {
-  const A = I[0], g = I[1], C = I[2], B = I[3], Q = I[4], E = I[5], D = I[6], i = I[7], w = I[8], G = I[9], o = I[10], F = I[11], Y = I[12], h = I[13], N = I[14], R = I[15], J = A * E - g * Q, s = A * D - C * Q, c = g * D - C * E, y = w * h - G * Y, a = w * N - o * Y, M = G * N - o * h, L = A * M - g * a + C * y, H = Q * M - E * a + D * y, l = w * c - G * s + o * J, q = Y * c - h * s + N * J;
-  return i * L - B * H + R * l - F * q;
+  const A = I[0], g = I[1], C = I[2], B = I[3], Q = I[4], E = I[5], D = I[6], i = I[7], w = I[8], G = I[9], o = I[10], F = I[11], Y = I[12], h = I[13], N = I[14], R = I[15], J = A * E - g * Q, s = A * D - C * Q, c = g * D - C * E, y = w * h - G * Y, a = w * N - o * Y, M = G * N - o * h, L = A * M - g * a + C * y, H = Q * M - E * a + D * y, l = w * c - G * s + o * J, d = Y * c - h * s + N * J;
+  return i * L - B * H + R * l - F * d;
 }
 function yA(I, A, g) {
   const C = A[0], B = A[1], Q = A[2], E = A[3], D = A[4], i = A[5], w = A[6], G = A[7], o = A[8], F = A[9], Y = A[10], h = A[11], N = A[12], R = A[13], J = A[14], s = A[15];
@@ -2114,8 +2114,8 @@ function sI(I, A, g) {
   return I[0] = A[0] * C, I[1] = A[1] * C, I[2] = A[2] * C, I[3] = A[3] * C, I[4] = A[4] * B, I[5] = A[5] * B, I[6] = A[6] * B, I[7] = A[7] * B, I[8] = A[8] * Q, I[9] = A[9] * Q, I[10] = A[10] * Q, I[11] = A[11] * Q, I[12] = A[12], I[13] = A[13], I[14] = A[14], I[15] = A[15], I;
 }
 function KI(I, A, g, C) {
-  let B = C[0], Q = C[1], E = C[2], D = Math.sqrt(B * B + Q * Q + E * E), i, w, G, o, F, Y, h, N, R, J, s, c, y, a, M, L, H, l, q, W, d, V, k, U;
-  return D < O ? null : (D = 1 / D, B *= D, Q *= D, E *= D, w = Math.sin(g), i = Math.cos(g), G = 1 - i, o = A[0], F = A[1], Y = A[2], h = A[3], N = A[4], R = A[5], J = A[6], s = A[7], c = A[8], y = A[9], a = A[10], M = A[11], L = B * B * G + i, H = Q * B * G + E * w, l = E * B * G - Q * w, q = B * Q * G - E * w, W = Q * Q * G + i, d = E * Q * G + B * w, V = B * E * G + Q * w, k = Q * E * G - B * w, U = E * E * G + i, I[0] = o * L + N * H + c * l, I[1] = F * L + R * H + y * l, I[2] = Y * L + J * H + a * l, I[3] = h * L + s * H + M * l, I[4] = o * q + N * W + c * d, I[5] = F * q + R * W + y * d, I[6] = Y * q + J * W + a * d, I[7] = h * q + s * W + M * d, I[8] = o * V + N * k + c * U, I[9] = F * V + R * k + y * U, I[10] = Y * V + J * k + a * U, I[11] = h * V + s * k + M * U, A !== I && (I[12] = A[12], I[13] = A[13], I[14] = A[14], I[15] = A[15]), I);
+  let B = C[0], Q = C[1], E = C[2], D = Math.sqrt(B * B + Q * Q + E * E), i, w, G, o, F, Y, h, N, R, J, s, c, y, a, M, L, H, l, d, W, V, q, k, U;
+  return D < O ? null : (D = 1 / D, B *= D, Q *= D, E *= D, w = Math.sin(g), i = Math.cos(g), G = 1 - i, o = A[0], F = A[1], Y = A[2], h = A[3], N = A[4], R = A[5], J = A[6], s = A[7], c = A[8], y = A[9], a = A[10], M = A[11], L = B * B * G + i, H = Q * B * G + E * w, l = E * B * G - Q * w, d = B * Q * G - E * w, W = Q * Q * G + i, V = E * Q * G + B * w, q = B * E * G + Q * w, k = Q * E * G - B * w, U = E * E * G + i, I[0] = o * L + N * H + c * l, I[1] = F * L + R * H + y * l, I[2] = Y * L + J * H + a * l, I[3] = h * L + s * H + M * l, I[4] = o * d + N * W + c * V, I[5] = F * d + R * W + y * V, I[6] = Y * d + J * W + a * V, I[7] = h * d + s * W + M * V, I[8] = o * q + N * k + c * U, I[9] = F * q + R * k + y * U, I[10] = Y * q + J * k + a * U, I[11] = h * q + s * k + M * U, A !== I && (I[12] = A[12], I[13] = A[13], I[14] = A[14], I[15] = A[15]), I);
 }
 function SI(I, A, g) {
   const C = Math.sin(g), B = Math.cos(g), Q = A[4], E = A[5], D = A[6], i = A[7], w = A[8], G = A[9], o = A[10], F = A[11];
@@ -3571,6 +3571,10 @@ const nA = CA`
             Light direction
             <volxel-cube-direction id="direction"></volxel-cube-direction>
         </div>
+        <label>
+            <input type="checkbox" name="light_backlight" id="light_backlight">
+            Backlight
+        </label>
     </div>
     <div class="tab" id="transfer-tab">
         <label>
@@ -3578,8 +3582,8 @@ const nA = CA`
             <input type="file" name="transfer_file" id="transfer_file">
         </label>
         <label>
-            Use generated transfer function
             <input type="checkbox" name="generated_transfer" id="generated_transfer">
+            Use generated transfer function
         </label>
         <volxel-colorramp id="color-ramp"></volxel-colorramp>
         <label>
@@ -3602,8 +3606,8 @@ const nA = CA`
             <input type="range" name="samples" id="samples" min="1" max="3000" step="1">
         </label>
         <label>
-            Debug Hit Positions
             <input type="checkbox" name="debugHits" id="debugHits" >
+            Debug Hit Positions
         </label>
     </div>
     <label class="menuButton">
@@ -4289,6 +4293,8 @@ class kA extends HTMLElement {
   sampleRange = [0, 1];
   // light
   lightDir = new S(-1, -1, -1).normalize();
+  syncLightDir = !1;
+  lightDirInput;
   // volume settings
   densityScale = 1;
   volume = null;
@@ -4374,7 +4380,7 @@ class kA extends HTMLElement {
         });
       }).observe(this.canvas), hg(this.canvas, (k, U) => {
         this.restartRendering(() => {
-          U ? this.rescaleAABBFromClippingInput() : this.camera?.rotateAroundView(k);
+          U ? this.rescaleAABBFromClippingInput() : (this.camera?.rotateAroundView(k), this.maybeSyncLight());
         });
       }, (k) => this.restartRendering(() => this.camera?.zoom(k)) ?? !1, (k) => {
         this.restartRendering(() => {
@@ -4480,22 +4486,32 @@ class kA extends HTMLElement {
           const U = await SA(k[0]);
           this.restoreTransferSettings(U);
         });
-      });
-      const d = this.shadowRoot.querySelector("#direction");
-      d.addEventListener("direction", async (k) => {
+      }), this.lightDirInput = this.shadowRoot.querySelector("#direction"), this.lightDirInput.addEventListener("direction", async (k) => {
         const { detail: { x: U, y: m, z: T } } = k;
         this.restartRendering(() => {
           this.lightDir = new S(U, m, T);
         });
-      }), d.direction = this.lightDir;
-      const V = this.shadowRoot.querySelector("#debugHits");
-      V.checked = this.debugHits, V.addEventListener("change", async () => {
+      }), this.lightDirInput.direction = this.lightDir;
+      const V = this.shadowRoot.querySelector("#light_backlight");
+      V.checked = this.syncLightDir, V.addEventListener("change", () => {
+        this.restartRendering(() => {
+          this.syncLightDir = V.checked, this.maybeSyncLight();
+        });
+      });
+      const q = this.shadowRoot.querySelector("#debugHits");
+      q.checked = this.debugHits, q.addEventListener("change", async () => {
         await this.restartRendering(async () => {
-          this.debugHits = V.checked;
+          this.debugHits = q.checked;
         });
       }), requestAnimationFrame(this.render);
     } catch (g) {
       console.error(this, "encountered error during startup", g), this.handleError(g);
+    }
+  }
+  maybeSyncLight() {
+    if (this.syncLightDir) {
+      const A = this.camera.view.clone().subtract(this.camera.pos);
+      this.lightDir.set(-A.x, -A.y, -A.z), this.lightDirInput.direction = this.lightDir;
     }
   }
   handleError(A) {
