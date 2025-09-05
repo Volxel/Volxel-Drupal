@@ -4503,12 +4503,11 @@ class kA extends HTMLElement {
         });
       });
       const q = this.shadowRoot.querySelector("#debugHits");
-      throw q.checked = this.debugHits, q.addEventListener("change", async () => {
+      q.checked = this.debugHits, q.addEventListener("change", async () => {
         await this.restartRendering(async () => {
           this.debugHits = q.checked;
         });
-      }), new Error("Test");
-      requestAnimationFrame(this.render);
+      }), requestAnimationFrame(this.render);
     } catch (I) {
       this.handleError(I);
     }
