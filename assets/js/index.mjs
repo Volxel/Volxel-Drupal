@@ -4293,6 +4293,7 @@ class cA extends HTMLElement {
   // used for clipping controls
   mousePos = null;
   adjustingClipping = !1;
+  showClipping = !0;
   // input elements
   histogram;
   camera;
@@ -4344,7 +4345,7 @@ class cA extends HTMLElement {
           } : W;
         }
       }), this.gl = I, !I.getExtension("EXT_color_buffer_float")) throw new Error("EXT_color_buffer_float extension not available, can't render to float target");
-      if (!I.getExtension("EXT_float_blend")) throw new Error("EXT_float_blend extension not available, can't render clipping controls");
+      I.getExtension("EXT_float_blend") || (console.warn("EXT_float_blend extension not available, can't render clipping controls"), this.showClipping = !1);
       const E = u(I, I.VERTEX_SHADER, vA), D = u(I, I.FRAGMENT_SHADER, PA);
       this.program = FA(I, E, D);
       const i = u(I, I.FRAGMENT_SHADER, fA);
@@ -4712,11 +4713,14 @@ class cA extends HTMLElement {
         const I = (this.framebufferPingPong + this.framebuffers.length - 1) % this.framebuffers.length;
         this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, this.framebuffers[this.framebufferPingPong].fbo), this.gl.drawBuffers([this.gl.COLOR_ATTACHMENT0]), this.gl.viewport(0, 0, this.resolutionFactor * this.gl.canvas.width, this.resolutionFactor * this.gl.canvas.height), this.gl.clearColor(1, 0, 0, 1), this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT), this.gl.useProgram(this.program), this.bindUniforms(I), this.camera.bindAsUniforms(this.gl, this.program), this.gl.drawArrays(this.gl.TRIANGLES, 0, 6), this.gl.finish(), this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, null), A = this.framebufferPingPong, this.framebufferPingPong = (this.framebufferPingPong + 1) % this.framebuffers.length, this.frameIndex++, this.classList.remove("restarting");
       }
-      if (this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height), this.gl.clearColor(0, 0, 1, 1), this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT), this.gl.useProgram(this.blit), this.gl.activeTexture(this.gl.TEXTURE0 + 2 + A), this.gl.bindTexture(this.gl.TEXTURE_2D, this.framebuffers[A].target), this.gl.uniform1i(this.getUniformLocation("u_result", this.blit), 2 + A), this.gl.drawArrays(this.gl.TRIANGLES, 0, 6), this.gl.enable(this.gl.BLEND), this.gl.enable(this.gl.DEPTH_TEST), this.gl.enable(this.gl.CULL_FACE), this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA), this.gl.blendEquation(this.gl.FUNC_ADD), this.gl.bindVertexArray(this.clippingCube), this.gl.useProgram(this.clipping), this.camera.bindAsUniforms(this.gl, this.clipping), this.volume) {
-        const I = this.volume.aabbClipped(this.volumeClipMin, this.volumeClipMax), C = this.currentCubeFace(I);
-        this.gl.uniform3fv(this.getUniformLocation("u_volume_aabb", this.clipping), new Float32Array(I.flat())), this.gl.uniform1i(this.getUniformLocation("u_selected_face", this.clipping), (typeof C == "number" ? C + 1 : 0) * (this.adjustingClipping ? -1 : 1));
+      if (this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height), this.gl.clearColor(0, 0, 1, 1), this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT), this.gl.useProgram(this.blit), this.gl.activeTexture(this.gl.TEXTURE0 + 2 + A), this.gl.bindTexture(this.gl.TEXTURE_2D, this.framebuffers[A].target), this.gl.uniform1i(this.getUniformLocation("u_result", this.blit), 2 + A), this.gl.drawArrays(this.gl.TRIANGLES, 0, 6), this.showClipping) {
+        if (this.gl.enable(this.gl.BLEND), this.gl.enable(this.gl.DEPTH_TEST), this.gl.enable(this.gl.CULL_FACE), this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA), this.gl.blendEquation(this.gl.FUNC_ADD), this.gl.bindVertexArray(this.clippingCube), this.gl.useProgram(this.clipping), this.camera.bindAsUniforms(this.gl, this.clipping), this.volume) {
+          const I = this.volume.aabbClipped(this.volumeClipMin, this.volumeClipMax), C = this.currentCubeFace(I);
+          this.gl.uniform3fv(this.getUniformLocation("u_volume_aabb", this.clipping), new Float32Array(I.flat())), this.gl.uniform1i(this.getUniformLocation("u_selected_face", this.clipping), (typeof C == "number" ? C + 1 : 0) * (this.adjustingClipping ? -1 : 1));
+        }
+        this.gl.drawArrays(this.gl.TRIANGLES, 0, BA.length / 3), this.gl.disable(this.gl.CULL_FACE), this.gl.disable(this.gl.DEPTH_TEST);
       }
-      this.gl.drawArrays(this.gl.TRIANGLES, 0, BA.length / 3), this.gl.disable(this.gl.CULL_FACE), this.gl.disable(this.gl.DEPTH_TEST), this.gl.finish();
+      this.gl.finish();
     }
     requestAnimationFrame(this.render);
   };
