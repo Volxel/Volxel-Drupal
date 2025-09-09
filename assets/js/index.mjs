@@ -972,6 +972,8 @@ float stepDDA(vec3 pos, vec3 inv_dir, int mip) {
     return min(tmax.x, min(tmax.y, tmax.z));
 }
 
+const uint max_steps = 100u;
+
 // DDA-based transmittance
 float transmittanceDDA(Ray ray, inout uint seed) {
     vec2 near_far;
@@ -984,7 +986,8 @@ float transmittanceDDA(Ray ray, inout uint seed) {
     vec3 ri = 1.f / idir;
     // march brick grid
     float t = near_far.x + 1e-6f, Tr = 1.f, tau = -log(1.f - rng(seed)), mip = MIP_START;
-    while (t < near_far.y) {
+    uint step = 0u;
+    while (t < near_far.y && (step++ < max_steps)) {
         vec3 curr = ipos + t * idir;
 
         float majorant = u_volume_maj * lookup_transfer(lookup_majorant(curr, int(round(mip))) * u_volume_inv_maj).a;
@@ -1027,7 +1030,8 @@ bool sample_volumeDDA(Ray ray, out float t, inout vec3 throughput, inout uint se
     // march brick grid
     t = near_far.x + 1e-6f;
     float tau = -log(1.f - rng(seed)), mip = MIP_START;
-    while (t < near_far.y) {
+    uint step = 0u;
+    while (t < near_far.y && (step++ < max_steps)) {
         vec3 curr = ipos + t * idir;
         float majorant = u_volume_maj * lookup_transfer(lookup_majorant(curr, int(round(mip))) * u_volume_inv_maj).a;
 
@@ -3817,7 +3821,7 @@ class lg extends HTMLElement {
     return this._colors;
   }
   set colors(A) {
-    this._colors = A, this.sortColors(), console.log("rerendering colors"), this.rerenderColors(), this.dispatchEvent(new CustomEvent("change", { detail: this.colors }));
+    this._colors = A, this.sortColors(), this.rerenderColors(), this.dispatchEvent(new CustomEvent("change", { detail: this.colors }));
   }
   sortColors() {
     this.colors.sort((A, I) => A.stop - I.stop);
@@ -4335,7 +4339,7 @@ class cA extends HTMLElement {
               ;
             const EA = W.bind(h)(...T);
             for (let r; r = h.getError(); )
-              console.error(`Encountered WebGL error during call to ${U}:`, Object.entries(C).find(([mg, uA]) => r === uA)?.[1] ?? r);
+              console.error(`Encountered WebGL error during call to ${U}:`, Object.entries(C).find(([mg, uA]) => r === uA)?.[0] ?? r);
             return EA;
           } : W;
         }
@@ -4389,7 +4393,7 @@ class cA extends HTMLElement {
       const c = () => {
         I.texParameteri(I.TEXTURE_3D, I.TEXTURE_MIN_FILTER, I.NEAREST), I.texParameteri(I.TEXTURE_3D, I.TEXTURE_MAG_FILTER, I.NEAREST), I.texParameteri(I.TEXTURE_3D, I.TEXTURE_WRAP_S, I.CLAMP_TO_EDGE), I.texParameteri(I.TEXTURE_3D, I.TEXTURE_WRAP_T, I.CLAMP_TO_EDGE), I.texParameteri(I.TEXTURE_3D, I.TEXTURE_WRAP_R, I.CLAMP_TO_EDGE);
       };
-      this.indirection = I.createTexture(), this.gl.activeTexture(this.gl.TEXTURE0 + 1), this.gl.bindTexture(this.gl.TEXTURE_3D, this.indirection), c(), this.range = I.createTexture(), this.gl.activeTexture(this.gl.TEXTURE0 + 2), this.gl.bindTexture(this.gl.TEXTURE_3D, this.range), c(), this.atlas = I.createTexture(), this.gl.activeTexture(this.gl.TEXTURE0 + 3), this.gl.bindTexture(this.gl.TEXTURE_3D, this.atlas), c(), this.camera = new v(1), new ResizeObserver((h) => {
+      this.indirection = I.createTexture(), this.gl.activeTexture(this.gl.TEXTURE0 + 1), this.gl.bindTexture(this.gl.TEXTURE_3D, this.indirection), c(), this.range = I.createTexture(), this.gl.activeTexture(this.gl.TEXTURE0 + 2), this.gl.bindTexture(this.gl.TEXTURE_3D, this.range), I.texParameteri(I.TEXTURE_3D, I.TEXTURE_MIN_FILTER, I.NEAREST_MIPMAP_NEAREST), I.texParameteri(I.TEXTURE_3D, I.TEXTURE_WRAP_S, I.CLAMP_TO_EDGE), I.texParameteri(I.TEXTURE_3D, I.TEXTURE_WRAP_T, I.CLAMP_TO_EDGE), I.texParameteri(I.TEXTURE_3D, I.TEXTURE_WRAP_R, I.CLAMP_TO_EDGE), this.atlas = I.createTexture(), this.gl.activeTexture(this.gl.TEXTURE0 + 3), this.gl.bindTexture(this.gl.TEXTURE_3D, this.atlas), c(), this.camera = new v(1), new ResizeObserver((h) => {
         this.restartRendering(() => {
           for (const U of h) if (U.target === this.canvas) {
             const W = U.target, T = window.devicePixelRatio || 1, EA = Math.max(
