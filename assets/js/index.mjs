@@ -5130,6 +5130,9 @@ class lA extends HTMLElement {
             <div class="thumb"></div>
         `.content.cloneNode(!0);
     this.shadowRoot.appendChild(A), this.shadowRoot.adoptedStyleSheets.push(oA`
+            * {
+                box-sizing: border-box;
+            }
             :host {
                 display: flex;
                 flex: 1;
@@ -5138,35 +5141,41 @@ class lA extends HTMLElement {
                 padding: 0;
                 position: relative;
                 min-height: 1.8em;
-
-                input[type=range] {
-                    width: 100%;
-                    height: 100%;
-                    appearance: none;
-                    -webkit-appearance: none;
-                    border: none;
-                    background: none;
-                    position: relative;
+                &:before {
+                    content: "";
                     display: block;
-                    margin: 0;
-                    padding: 0;
-                    cursor: grab;
-
-                    &:active {
-                        cursor: grabbing;
-                    }
-                }
-
-                input[type=range]::-webkit-slider-runnable-track, input[type=range]::-moz-range-track {
-                    background: white;
+                    position: absolute;
+                    top: 50%;
                     height: 1px;
-                    opacity: 0.8;
+                    left: 0;
+                    right: 0;
+                    background: white;
+                    opacity: .8;
                 }
+            }
 
-                input[type=range]::-moz-range-thumb, input[type=range]::-webkit-slider-thumb {
-                    -webkit-appearance: none;
-                    opacity: 0;
+            input {
+                opacity: 0;
+                width: 100%;
+                height: 100%;
+                appearance: none;
+                -webkit-appearance: none;
+                border: none;
+                background: none;
+                position: relative;
+                display: block;
+                margin: 0;
+                padding: 0;
+                cursor: grab;
+
+                &:active {
+                    cursor: grabbing;
                 }
+            }
+
+            input::-moz-range-thumb, input::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                opacity: 0;
             }
             div.thumb {
                 position: absolute;
@@ -5176,14 +5185,14 @@ class lA extends HTMLElement {
                 background: #0005;
                 backdrop-filter: blur(8px);
                 border: 1px solid #777;
-                left: calc(var(--value, 0) * (100% - 4ch));
+                left: calc(var(--value, 0) * (100% - var(--slider-width, 4ch)));
                 padding-inline: 3px;
                 box-shadow: 0 0 2px black;
                 //transform: translateX(-50%);
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                width: 4ch;
+                width: var(--slider-width, 4ch);
 
                 &:after {
                     position: relative;
@@ -5211,7 +5220,7 @@ class lA extends HTMLElement {
   }
   setupSliderInfo() {
     const A = this.getAttribute("step") ?? "1", I = Number.parseFloat(A) !== Math.floor(Number.parseFloat(A)), C = A.length - A.lastIndexOf(".") - 1, B = (this.value - this.min) / (this.max - this.min);
-    this.style.setProperty("--value", B.toFixed(2)), this.style.setProperty("--absolute-value", `"${I ? this.value.toFixed(C) : this.value}"`);
+    this.style.setProperty("--value", B.toFixed(2)), this.style.setProperty("--slider-width", `${I ? C + 3 : (this.max + "").length + 1}ch`), this.style.setProperty("--absolute-value", `"${I ? this.value.toFixed(C) : this.value}"`);
   }
   get value() {
     return this.wrapped.valueAsNumber;
