@@ -1,13 +1,22 @@
 {#
   Template variables:
-  - urls: array of absolute URLs
+  - zip_url: url for the zip file containing data
+  - json_url: url for the settings json
+  - exr_url: url for the environment map
+  - unused_urls: array containing unused URLs, used for printing a warning
   - unique_id: id for the element
 #}
 
 <div class="volxel-wrapper">
-{% if urls|length == 1 %}
-  <volxel-3d-viewer id="{{ unique_id }}" data-zip-url="{{ urls[0]|e('html_attr') }}"></volxel-3d-viewer>
-{% else %}
-  <volxel-3d-viewer id="{{ unique_id }}" data-urls="{{ urls|json_encode|e('html_attr') }}"></volxel-3d-viewer>
-{% endif %}
+  <volxel-3d-viewer id="{{ unique_id }}" data-zip-url="{{ zip_url|e('html_attr') }}" data-settings-url="{{ json_url|e('html_attr') }}" data-env-url="{{ exr_url|e('html_attr') }}"></volxel-3d-viewer>
 </div>
+{% if unused_urls|length > 0 %}
+  <p>Warning, there were unused file <abbr>URL</abbr>s:</p>
+  <ul>
+    {% for url in unused_urls %}
+      <li>
+        <a href="{{ url }}">{{ url }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}

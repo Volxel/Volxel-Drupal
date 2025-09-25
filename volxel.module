@@ -24,7 +24,10 @@ function volxel_theme($existing, $type, $theme, $path) {
     "volxel_viewer" => [
       "template" => "volxel-viewer",
       "variables" => [
-        "urls" => [],
+        "zip_url" => NULL,
+        "json_url" => NULL,
+        "exr_url" => NULL,
+        "unused_urls" => [],
         "unique_id" => NULL
       ]
     ]
