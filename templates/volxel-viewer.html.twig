@@ -8,7 +8,7 @@
 #}
 
 <div class="volxel-wrapper">
-  <volxel-3d-viewer id="{{ unique_id }}" data-zip-url="{{ zip_url|e('html_attr') }}" data-settings-url="{{ json_url|e('html_attr') }}" data-env-url="{{ exr_url|e('html_attr') }}"></volxel-3d-viewer>
+  <volxel-3d-viewer id="{{ unique_id }}" data-zip-url="{{ zip_url|e('html_attr') }}" data-benchmark-url="{{ json_url|e('html_attr') }}" data-env-url="{{ exr_url|e('html_attr') }}"></volxel-3d-viewer>
 </div>
 {% if unused_urls|length > 0 %}
   <p>Warning, there were unused file <abbr>URL</abbr>s:</p>
