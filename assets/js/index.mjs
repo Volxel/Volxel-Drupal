@@ -5381,6 +5381,7 @@ class WA extends HTMLElement {
   benchmarkTime = 0;
   benchmarkResults = [];
   benchmarkInits = [];
+  benchmarkCurrentName;
   indirection;
   range;
   atlas;
@@ -5811,7 +5812,7 @@ ${B}`);
     for (const B of A.benchmarks)
       this.benchmarkInits.push(async () => {
         await this.restartRendering(async () => {
-          B.zip && await this.restartFromZipUrl(B.zip), B.env && await this.loadEnvFromUrl(B.env), typeof B.settings == "number" ? this.restoreSettings(A.sharedSettings[B.settings]) : this.restoreSettings(B.settings), B.renderMode && (this.renderMode = B.renderMode, await this.restartRenderMode()), this.singleBenchmark();
+          this.benchmarkCurrentName = B.name, console.log("Starting benchmark", B.name), B.zip && await this.restartFromZipUrl(B.zip), B.env && await this.loadEnvFromUrl(B.env), typeof B.settings == "number" ? this.restoreSettings(A.sharedSettings[B.settings]) : this.restoreSettings(B.settings), B.renderMode && (this.renderMode = B.renderMode, await this.restartRenderMode()), this.singleBenchmark();
         }, "Setting up benchmark");
       });
     this.benchmarkInits.reverse();
@@ -5845,7 +5846,7 @@ ${B}`);
     const A = this.gl;
     if (!A) throw new Error("Resizing method called without GL context being set up");
     const I = Math.floor(this.canvas.width * this.resolutionFactor * this.settings.resolutionFactor), B = Math.floor(this.canvas.height * this.resolutionFactor * this.settings.resolutionFactor);
-    console.log("viewport", [0, 0, I, B]), A.viewport(0, 0, I, B);
+    alert("viewport" + JSON.stringify([0, 0, I, B])), A.viewport(0, 0, I, B);
     for (const { target: C } of this.framebuffers)
       A.bindTexture(A.TEXTURE_2D, C), A.texImage2D(
         A.TEXTURE_2D,
@@ -6016,6 +6017,7 @@ ${B}`);
         this.gl.bindFramebuffer(this.gl.FRAMEBUFFER, null), I = this.framebufferPingPong, this.framebufferPingPong = (this.framebufferPingPong + 1) % this.framebuffers.length, this.frameIndex++, this.frameIndex % 100 === 0 && this.benchmarking && console.log("Rendered frame", this.frameIndex, "of", this.settings.maxSamples), this.classList.remove("restarting");
       } else if (this.benchmarking) {
         const B = {
+          name: this.benchmarkCurrentName,
           settings: this.settings,
           timePerSample: this.benchmarkTime / this.frameIndex,
           totalTime: this.benchmarkTime,
